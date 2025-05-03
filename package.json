@@ -1,0 +1,26 @@
+{
+  "name": "lorem-ipsum-generator",
+  "version": "1.0.0",
+  "description": "A simple Lorem Ipsum text generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'Building the project...' && npm run build:js",
+    "build:js": "babel src -d dist" // This is an example if using Babel for transpiling JS
+  },
+  "keywords": [
+    "lorem",
+    "ipsum",
+    "generator",
+    "text"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "faker": "^5.5.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0", // Assuming you're using Babel for JS transpiling
+    "babel-preset-env": "^1.7.0" // Babel preset for compiling modern JS to ES5
+  }
+}
