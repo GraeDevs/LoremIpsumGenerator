@@ -2,195 +2,201 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Randomized Lorem Ipsum Generator</title>
     <style>
+        :root {
+            --bg: #1a1a1a;
+            --fg: #eee;
+            --accent: #666;
+            --border: #333;
+            --highlight: #ccc;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
             padding: 2rem;
-            background-color: #f4f4f4;
+            margin: 0;
         }
 
         h1 {
-            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--highlight);
         }
 
         .generator {
-            margin-bottom: 1.5rem;
+            background-color: #222;
+            padding: 1.5rem;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        label {
+            flex: 1 1 120px;
+            color: var(--highlight);
+        }
+
+        select, button {
+            flex: 1 1 70px;
+            min-width: 70px;
+            border-radius: 999px; /* pill shape */
         }
 
         textarea {
             width: 100%;
             height: 300px;
+            background-color: #111;
+            color: var(--fg);
+            border: 1px solid var(--border);
             padding: 1rem;
             font-size: 1rem;
             line-height: 1.6;
+            border-radius: 8px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+            button:hover {
+                background-color: #555;
+            }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            background-color: #111;
+            color: var(--fg);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-radius: 8px;
             resize: vertical;
         }
     </style>
 </head>
 <body>
 
-    <h1>Randomized Lorem Ipsum Generator</h1>
+    <h1>Lorem Ipsum Generator</h1>
+    <h2 style="text-align: center;">This is just a basic, simple-to-use Lorem Ipsum Generator with no bloat, or things all over the screen.</h2>
 
     <div class="generator">
-        <label for="paragraphs">Number of paragraphs:</label>
-        <select id="paragraphs">
-            <!-- Dynamically creates options 1 to 10 -->
-            <script>
-        for (let i = 1; i <= 10; i++) {
-          document.write(`<option value="${i}">${i}</option>`);
-        }
-            </script>
+        <label for="paragraphs">Paragraphs:</label>
+        <select id="paragraphs"></select>
+
+        <label for="length">Paragraph Length:</label>
+        <select id="length">
+            <option value="short">Short</option>
+            <option value="medium">Medium</option>
+            <option value="long">Long</option>
         </select>
+
         <button onclick="generateLorem()">Generate</button>
     </div>
 
     <textarea id="output" readonly></textarea>
 
     <script>
-    const words = [
-      "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing",
-      "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore",
-      "et", "dolore", "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam",
-      "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "aliquip",
-      "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "in", "reprehenderit",
-      "voluptate", "velit", "esse", "cillum", "eu", "fugiat", "nulla", "pariatur",
-      "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "culpa",
-      "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"
-    ];
+        const words = [
+            "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing",
+            "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore",
+            "et", "dolore", "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam",
+            "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "aliquip",
+            "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "in", "reprehenderit",
+            "voluptate", "velit", "esse", "cillum", "eu", "fugiat", "nulla", "pariatur",
+            "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "culpa",
+            "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"
+        ];
 
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
-    function generateSentence() {
-      const wordCount = getRandomInt(6, 16);
-      const sentenceWords = [];
-      for (let i = 0; i < wordCount; i++) {
-        const word = words[getRandomInt(0, words.length - 1)];
-        sentenceWords.push(word);
-      }
-      let sentence = sentenceWords.join(" ");
-      sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
-      return sentence;
-    }
+        function generateSentence() {
+            const wordCount = getRandomInt(6, 16);
+            const sentenceWords = [];
+            for (let i = 0; i < wordCount; i++) {
+                const word = words[getRandomInt(0, words.length - 1)];
+                sentenceWords.push(word);
+            }
+            let sentence = sentenceWords.join(" ");
+            return sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
+        }
 
-    function generateParagraph() {
-      const sentenceCount = getRandomInt(3, 6);
-      const paragraph = [];
-      for (let i = 0; i < sentenceCount; i++) {
-        paragraph.push(generateSentence());
-      }
-      return paragraph.join(" ");
-    }
+        function generateParagraph(length) {
+            const range = {
+                short: [2, 4],
+                medium: [4, 6],
+                long: [6, 9]
+            };
+            const [min, max] = range[length] || [4, 6];
+            const count = getRandomInt(min, max);
+            const paragraph = [];
+            for (let i = 0; i < count; i++) {
+                paragraph.push(generateSentence());
+            }
+            return paragraph.join(" ");
+        }
 
-    function generateLorem() {
-      const count = parseInt(document.getElementById('paragraphs').value);
-      const paragraphs = [];
-      for (let i = 0; i < count; i++) {
-        paragraphs.push(generateParagraph());
-      }
-      document.getElementById('output').value = paragraphs.join("\n\n");
-    }
+        function generateLorem() {
+            const count = parseInt(document.getElementById('paragraphs').value);
+            const length = document.getElementById('length').value;
+
+            // Save settings
+            localStorage.setItem('lorem_paragraphs', count);
+            localStorage.setItem('lorem_length', length);
+
+            const paragraphs = [];
+            for (let i = 0; i < count; i++) {
+                paragraphs.push(generateParagraph(length));
+            }
+            document.getElementById('output').value = paragraphs.join("\n\n");
+        }
+        function loadSettings() {
+            const paraSelect = document.getElementById('paragraphs');
+            const lengthSelect = document.getElementById('length');
+
+            // Create paragraph options
+            paraSelect.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                paraSelect.appendChild(opt);
+            }
+
+            // Load saved settings or use defaults
+            const savedParas = localStorage.getItem('lorem_paragraphs') || '3';
+            const savedLength = localStorage.getItem('lorem_length') || 'medium';
+
+            paraSelect.value = savedParas;
+            lengthSelect.value = savedLength;
+
+            // Save on change
+            paraSelect.addEventListener('change', () => {
+                localStorage.setItem('lorem_paragraphs', paraSelect.value);
+            });
+
+            lengthSelect.addEventListener('change', () => {
+                localStorage.setItem('lorem_length', lengthSelect.value);
+            });
+        }
+
+        // Initialize
+        window.onload = loadSettings;
     </script>
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Randomized Lorem Ipsum Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 2rem;
-            background-color: #f4f4f4;
-        }
 
-        h1 {
-            color: #333;
-        }
-
-        .generator {
-            margin-bottom: 1.5rem;
-        }
-
-        textarea {
-            width: 100%;
-            height: 300px;
-            padding: 1rem;
-            font-size: 1rem;
-            line-height: 1.6;
-            resize: vertical;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Randomized Lorem Ipsum Generator</h1>
-
-    <div class="generator">
-        <label for="paragraphs">Number of paragraphs:</label>
-        <select id="paragraphs">
-            <!-- Dynamically creates options 1 to 10 -->
-            <script>
-        for (let i = 1; i <= 10; i++) {
-          document.write(`<option value="${i}">${i}</option>`);
-        }
-            </script>
-        </select>
-        <button onclick="generateLorem()">Generate</button>
-    </div>
-
-    <textarea id="output" readonly></textarea>
-
-    <script>
-    const words = [
-      "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing",
-      "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore",
-      "et", "dolore", "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam",
-      "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "aliquip",
-      "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "in", "reprehenderit",
-      "voluptate", "velit", "esse", "cillum", "eu", "fugiat", "nulla", "pariatur",
-      "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "culpa",
-      "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"
-    ];
-
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function generateSentence() {
-      const wordCount = getRandomInt(6, 16);
-      const sentenceWords = [];
-      for (let i = 0; i < wordCount; i++) {
-        const word = words[getRandomInt(0, words.length - 1)];
-        sentenceWords.push(word);
-      }
-      let sentence = sentenceWords.join(" ");
-      sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
-      return sentence;
-    }
-
-    function generateParagraph() {
-      const sentenceCount = getRandomInt(3, 6);
-      const paragraph = [];
-      for (let i = 0; i < sentenceCount; i++) {
-        paragraph.push(generateSentence());
-      }
-      return paragraph.join(" ");
-    }
-
-    function generateLorem() {
-      const count = parseInt(document.getElementById('paragraphs').value);
-      const paragraphs = [];
-      for (let i = 0; i < count; i++) {
-        paragraphs.push(generateParagraph());
-      }
-      document.getElementById('output').value = paragraphs.join("\n\n");
-    }
-    </script>
+    <h3 style="text-align: center;">For those who don't know, Lorem Ipsum is placeholder or dummy text commonly used in publishing and graphic design to demonstrate the visual form of a document or typeface without relying on meaningful content. In essense, its unreadable text that serves no purpose.</h3>
 
 </body>
 </html>
