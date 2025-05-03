@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "gulp build",  // Run the Gulp build task
-    "build:js": "gulp build:js"  // Optionally add a specific JS build task for Gulp
+    "build": "echo 'Building the project...' && npm run build:js",
+    "build:js": "babel src -d dist"
   },
   "keywords": [
     "lorem",
@@ -20,8 +20,7 @@
     "faker": "^5.5.3"
   },
   "devDependencies": {
-     "gulp": "^4.0.2",  // Gulp task runner
-    "gulp-babel": "^8.0.0",  // Gulp plugin for Babel
-    "babel-preset-env": "^1.7.0"  // Babel preset for modern JS
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
