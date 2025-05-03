@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "echo 'Building the project...' && npm run build:js",
-    "build:js": "babel src -d dist" // This is an example if using Babel for transpiling JS
+    "build": "gulp build",  // Run the Gulp build task
+    "build:js": "gulp build:js"  // Optionally add a specific JS build task for Gulp
   },
   "keywords": [
     "lorem",
@@ -14,13 +14,14 @@
     "generator",
     "text"
   ],
-  "author": "Your Name",
+  "author": "Grae",
   "license": "MIT",
   "dependencies": {
     "faker": "^5.5.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0", // Assuming you're using Babel for JS transpiling
-    "babel-preset-env": "^1.7.0" // Babel preset for compiling modern JS to ES5
+     "gulp": "^4.0.2",  // Gulp task runner
+    "gulp-babel": "^8.0.0",  // Gulp plugin for Babel
+    "babel-preset-env": "^1.7.0"  // Babel preset for modern JS
   }
 }
